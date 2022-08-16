@@ -1,0 +1,1 @@
+bin2header icon_tiny.png

@@ -1,0 +1,12 @@
+﻿---
+BasedOnStyle: Google
+PointerAlignment: Left
+AccessModifierOffset: -1
+AlwaysBreakTemplateDeclarations: Yes
+AllowShortFunctionsOnASingleLine: Inline
+AlignAfterOpenBracket: Align
+AllowShortCaseLabelsOnASingleLine: 'true'
+BreakConstructorInitializers: 'BeforeComma'
+BinPackArguments: false
+BinPackParameters: false
+...

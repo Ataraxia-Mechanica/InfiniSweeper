@@ -1,0 +1,62 @@
+#You are welcome to modify levels.toml to see all kinds of jank.
+#Only 255 layers of boards is displayed on screen at once.
+#To save resources neighbour detection would only go through 4 portals, or a maximum cache size of 63 boards.
+#WARNING: Better not put clone portals next to each other. Possible jank in such situation.
+
+#level name. Don't skip numbers and start at 1
+[1]
+#[] is a cell that can have mines
+#<> is already open
+#mm is guaranteed mine,
+#ff is flagged guaranteed mine,
+#sf is safe(no mine allowed)
+#2 digit number would override what the cell displays, also opens it (for level selection menu)
+#anything else is void including spaces, `..` is encouraged
+#board name number MUST start from 0 and NOT skip
+#the board data MUST BE a rectangle (also need padding on the right)
+#otherwise data location would mess up
+board0 = """
+[][][][][][]
+[][][][][][]
+[][]....[][]
+[][]....[][]
+[][][][][][]
+[][][][][][]
+"""
+#<optional>
+#guaranteed mines are counted in
+#setting this to 0 isn't the same as not defining it, see totalmine
+#don't let mine amount exceed the amount of mines can be in a board/level, game will hang
+board0mine = 5
+
+board1 = """
+[][][][][][][][][]
+[][][][]..[][][][]
+[][][][][][][][][]
+[][][]......[][][]
+[][][]......[][][]
+[][][]......[][][]
+[][][][][][][][][]
+[][][][]..[][][][]
+[][][][][][][][][]
+"""
+
+board1mine = 9
+
+#optional
+#if all boards have minecount, then rest of the mines are randomly distributed
+#if not all boards have mincount, then rest of these mines go to those boards without it defined
+#without this game can still deduce total number of mines
+totalmine = 14
+
+#clone = true <optional, defaults to false>
+#going into a cloned board and zooming out would go out from the only non-clone portal 
+#(more than one non-cloned portal would cause camera detection to break, don't do that)
+#x and y are 0-indexed (the upper-left cell is [x = 0, y = 0])
+#w and h is the size of the hole cut from the parent board
+portals = [
+    { from = 1, to = 0, x = 4, y = 1, w = 1, h = 1, clone = true },
+    { from = 1, to = 0, x = 3, y = 3, w = 3, h = 3 },
+    { from = 1, to = 0, x = 4, y = 7, w = 1, h = 1, clone = true },
+    { from = 0, to = 1, x = 2, y = 2, w = 2, h = 2 },
+]
