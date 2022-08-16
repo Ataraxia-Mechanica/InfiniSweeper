@@ -51,9 +51,9 @@ target_compile_options(${LOCAL_EXECUTABLE_NAME} PRIVATE ${OPTIONS})
 
 # Disable console on release. -mwindows does not work in Clang with GCC-like commandline mode but same argument as MSVC mode works
 if(NOT CMAKE_BUILD_TYPE MATCHES Debug)
-    if(CMAKE_CXX_COMPILER_FRONTEND_VARIANT MATCHES "MSVC")
+    if(CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "MSVC")
         target_link_options(${LOCAL_EXECUTABLE_NAME} PRIVATE "/SUBSYSTEM:WINDOWS" "/ENTRY:mainCRTStartup")
-    elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         target_link_options(${LOCAL_EXECUTABLE_NAME} PRIVATE "-Wl,-subsystem:windows,-entry:mainCRTStartup")
     else()# GCC only
         target_link_options(${LOCAL_EXECUTABLE_NAME} PRIVATE "-mwindows")

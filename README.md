@@ -23,3 +23,4 @@ cmake build
 cd build
 cmake --build .
 ```
+4. (When building for windows release:) Run pack_game_windows.bat, and InfiniSweeper-win64 folder would be generated containing binary and assets

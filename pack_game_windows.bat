@@ -1,5 +1,6 @@
 mkdir InfiniSweeper-win64
 cd InfiniSweeper-win64
+copy ..\build\bin\Release\InfiniSweeper.exe *
 copy ..\build\Release\bin\InfiniSweeper.exe *
 copy ..\levels.toml *
 copy ..\level_example.toml *
