@@ -22,8 +22,14 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
-# Imgui
-imgui.ini
-
-#packed files
+# Packed files
 InfiniSweeper-win64
+
+# Vendors
+vendor/*
+
+# Un-assembled tiles
+res/*
+
+# Save
+save
