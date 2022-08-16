@@ -23,5 +23,5 @@ cmake build
 cd build
 cmake --build .
 ```
-3. (Alternative:)Use VSCode's CMake plugin to choose compiler and build/compile.
+3. (Alternative:) Use VSCode's CMake plugin to choose compiler and build/compile.
 4. (When building for windows release:) Run pack_game_windows.bat, and InfiniSweeper-win64 folder would be generated containing binary and assets
