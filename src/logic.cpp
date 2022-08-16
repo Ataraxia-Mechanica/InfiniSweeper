@@ -298,9 +298,11 @@ bool PortalRecord::RejectRoute(Portal& portal, bool go_up) {
   if (!this->portal) return false;
 
   if (this->go_up != go_up) {
-    if (this->portal.value() == &portal)
+    if (this->portal.value()->from == portal.from &&
+        this->portal.value()->to == portal.to)
       return true;
   }
+
   return false;
 }
 
@@ -340,7 +342,7 @@ void Level::CalculateNeighbors() {
 
         // don't go up with cloned boards, period. causes endless edge cases and
         // headaches
-        //if (boards[record.board_info.index].has_clones) continue;
+        // if (boards[record.board_info.index].has_clones) continue;
         portal_AND_infos = GetParentRectInfo(record.board_info, true);
         for (auto& portal_AND_info : portal_AND_infos) {
           auto& portal = portal_AND_info.first;
