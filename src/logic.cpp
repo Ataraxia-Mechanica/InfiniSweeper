@@ -297,9 +297,10 @@ void Level::UpdateBoardRectCache() {
 bool PortalRecord::RejectRoute(Portal& portal, bool go_up) {
   if (!this->portal) return false;
 
+  // only always go up or down, rip adjacent boards
   if (this->go_up != go_up) {
-    if (this->portal.value()->from == portal.from &&
-        this->portal.value()->to == portal.to)
+    //if (this->portal.value()->from == portal.from &&
+    //    this->portal.value()->to == portal.to)
       return true;
   }
 
