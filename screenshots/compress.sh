@@ -1,0 +1,1 @@
+mogrify -define png:compression-level=9 PNG24:*.png
