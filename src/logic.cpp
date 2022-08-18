@@ -237,10 +237,8 @@ bool Level::ChangeRootBoardOnce() {
     auto child_rect_clipped_size =
         child_rect_clipped.width * child_rect_clipped.height;
 
-    // tolerance needs to be smaller than zooming out, otherwise would go into
-    // oscillation
     if (RectUtil::is_inside(child_rect_info.rect, camera_world_rect) ||
-        child_rect_clipped_size >= root_rect_clipped_size) {
+        child_rect_clipped_size > root_rect_clipped_size) {
       float scale = (float)(boards[child_rect_info.index].width) / portal.width;
 
       // test if reaching zoom limit
