@@ -738,6 +738,7 @@ void Cell::Draw(rl::Rect world_coord, State state, AtlasManager& atlas) {
 void Board::Draw(rl::Rect rect, State state, AtlasManager& atlas) {
   auto pixel_rect = CoordTransform::WorldToPixel(rect);
   if (pixel_rect.width * pixel_rect.height < 2.0f) return;
+  if (!rect.CheckCollision(camera_world_rect)) return;
   for (i32 x = 0; x < width; x++) {
     for (i32 y = 0; y < height; y++) {
       auto element = Get(x, y);
