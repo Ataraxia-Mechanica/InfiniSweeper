@@ -149,7 +149,7 @@ vector<pair<Portal&, BoardRectInfo>> Level::GetChildRectInfo(
 }
 
 void Level::ChangeRootBoard() {
-  static constexpr u32 max_root_board_change = 4;
+  static constexpr u32 max_root_board_change = 1;
 
   for (int i = 0; i < max_root_board_change; i++) {
     if (!ChangeRootBoardOnce()) break;
@@ -296,7 +296,7 @@ bool PortalRecord::RejectRoute(Portal& portal, bool go_up) {
   if (!this->portal) return false;
 
   // only always go up or down when clones are involved
-  if (this->go_up != go_up && (portal.clone || this->portal.value()->clone)) {
+  if (this->go_up != go_up) {
     // if (this->portal.value()->from == portal.from &&
     //     this->portal.value()->to == portal.to)
     return true;
