@@ -4,7 +4,7 @@ InfiniSweeper is a spin on the classic game Minesweeper. This game adds infinite
 ## Features
 - Infinite recursion of rectangular minesweeper boards, where each board can be positioned inside another arbitrarily.
 - Cloned board mechanic. It's like Patrick's parabox's clone mechanic, but it works on camera instead: zoom into a clone board and zoom out, camera would be zoomed out from the original.
-- Though a level editor is not included, it's easy to design levels due to them being written in toml, and can be hot reloaded. An example with comments in in level_example.toml.
+- Though a level editor is not included, it's easy to design levels due to them being written in toml, and can be hot reloaded. An example with comments is in level_example.toml.
 ## Compiling
 InfiniSweeper uses CMake, and supports MSVC, GCC and Clang.
 Follow the following steps to compile:
