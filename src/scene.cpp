@@ -4,6 +4,7 @@
 #include <cmath>
 #include <cstdio>
 #include <fstream>
+#include <string.h>
 
 #include "rect_util.hpp"
 #include "serializer.hpp"
