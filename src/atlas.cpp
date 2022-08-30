@@ -1,19 +1,32 @@
 #include "atlas.hpp"
 
+#include <external/glfw/include/GLFW/glfw3.h>
+
 #include <algorithm>
+#include <iostream>
 #include <string>
 
 #include "transform.hpp"
+
+#define GL_TEXTURE_2D 0x0DE1
+#define GL_TEXTURE_LOD_BIAS 0x8501
 
 AtlasManager::AtlasManager() {
   tile = rl::Texture2D("res/tile.png");
   tile.GenMipmaps();
   tile.SetFilter(TEXTURE_FILTER_TRILINEAR);
+  glBindTexture(GL_TEXTURE_2D, tile.id);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_LOD_BIAS, -0.5f);
+  glBindTexture(GL_TEXTURE_2D, 0);
 
   for (u32 i = 0; i < 2; i++) {
     number[i] = rl::Texture2D("res/number_" + std::to_string(i) + ".png");
     number[i].GenMipmaps();
     number[i].SetFilter(TEXTURE_FILTER_TRILINEAR);
+
+    glBindTexture(GL_TEXTURE_2D, number[i].id);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_LOD_BIAS, -0.5f);
+    glBindTexture(GL_TEXTURE_2D, 0);
   }
 
   tile_resolution = tile.GetWidth() / tile_x_max;
