@@ -26,10 +26,10 @@ _deps
 InfiniSweeper-win64
 
 # Vendors
-vendor/*
+vendor/*/
 
 # Un-assembled tiles
-res/*
+res/*/
 
 # Save
 save
