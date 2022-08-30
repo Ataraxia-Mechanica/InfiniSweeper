@@ -27,7 +27,7 @@ int main() {
   ClearBackground(BLACK);
   EndDrawing();
 
-  //icon and screen size
+  // icon and screen size
   {
     auto icon_image = rl::Image{".png", icon_tiny_png, sizeof(icon_tiny_png)};
     icon_image.Format(PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
@@ -39,7 +39,7 @@ int main() {
     SetWindowPosition(width / 6, height / 6);
   }
 
-  //loading screen
+  // loading screen
   {
     BeginDrawing();
     ClearBackground(BLACK);
