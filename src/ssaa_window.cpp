@@ -49,12 +49,15 @@ void SSAAWindow::BeginDrawing() {
 void SSAAWindow::BeginImGui() {
   ssaa.EndMode();
   window.BeginDrawing();
-  DrawTexturePro(ssaa.texture,
-                 rl::Rectangle(0, 0, canvas_size.x, -canvas_size.y),
-                 rl::Rectangle(0, 0, window.GetWidth(), window.GetHeight()),
-                 rl::Vector2(0, 0),
-                 0.0f,
-                 Color{255, 255, 255, 255});
+  ((rl::Texture&)ssaa.texture)
+      .Draw(rl::Rectangle(0, 0, canvas_size.x, -canvas_size.y),
+            rl::Rectangle(0, 0, window.GetWidth(), window.GetHeight()));
+  // DrawTexturePro(ssaa.texture,
+  //                rl::Rectangle(0, 0, canvas_size.x, -canvas_size.y),
+  //                rl::Rectangle(0, 0, window.GetWidth(), window.GetHeight()),
+  //                rl::Vector2(0, 0),
+  //                0.0f,
+  //                Color{255, 255, 255, 255});
   rlImGuiBegin();
 }
 
