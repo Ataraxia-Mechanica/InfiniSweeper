@@ -66,23 +66,29 @@ set_target_properties(${LOCAL_EXECUTABLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTO
 # Libraries
 
 set(ADDITIONAL_INCLUDES
-    "imgui/"
-    "rlImGui/"
-    "tomlplusplus/include/toml++/"
+"imgui/"
+"rlImGui/"
+"raylib/src/external/glfw/deps/"
+"tomlplusplus/include/toml++/"
 )
+
+list(TRANSFORM ADDITIONAL_INCLUDES PREPEND "vendor/")
+target_include_directories(${LOCAL_EXECUTABLE_NAME} PRIVATE ${ADDITIONAL_INCLUDES})
 
 set(LOCAL_SUBDIRECTORIES 
-    "raylib" 
-    "raylib-cpp"
-)
-
-set(LIBRARIES
-    "raylib" 
-    "raylib_cpp"
+"raylib" 
+"raylib-cpp"
 )
 
 list(TRANSFORM LOCAL_SUBDIRECTORIES PREPEND "vendor/")
 list(TRANSFORM LOCAL_SUBDIRECTORIES APPEND "/")
+
+set(LIBRARIES
+"raylib" 
+"raylib_cpp"
+)
+
+target_link_libraries(${LOCAL_EXECUTABLE_NAME} PRIVATE ${LIBRARIES})
 
 foreach(SUBDIRECTORY ${LOCAL_SUBDIRECTORIES})
     add_subdirectory(${SUBDIRECTORY})
@@ -100,9 +106,3 @@ file(GLOB IMGUI CONFIGURE_DEPENDS
 )
 
 target_sources(${LOCAL_EXECUTABLE_NAME} PRIVATE ${IMGUI})
-
-
-list(TRANSFORM ADDITIONAL_INCLUDES PREPEND "vendor/")
-target_include_directories(${LOCAL_EXECUTABLE_NAME} PRIVATE ${ADDITIONAL_INCLUDES})
-
-target_link_libraries(${LOCAL_EXECUTABLE_NAME} PRIVATE ${LIBRARIES})
