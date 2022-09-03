@@ -1,5 +1,6 @@
 #include "atlas.hpp"
 
+#include <glad/gl.h>
 #include <external/glfw/include/GLFW/glfw3.h>
 
 #include <algorithm>
@@ -7,9 +8,6 @@
 #include <string>
 
 #include "transform.hpp"
-
-#define GL_TEXTURE_2D 0x0DE1
-#define GL_TEXTURE_LOD_BIAS 0x8501
 
 AtlasManager::AtlasManager() {
   tile = rl::Texture2D("res/tile.png");
