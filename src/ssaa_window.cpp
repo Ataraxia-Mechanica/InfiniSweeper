@@ -12,7 +12,11 @@ float inverse_aspect_ratio;
 bool resized;
 
 SSAAWindow::SSAAWindow(u32 x, u32 y, float scale, std::string title) {
-  window = rl::Window(x, y, title, true);
+  #ifdef __APPLE__
+    window = rl::Window(x, y, title);
+  #else
+    window = rl::Window(x, y, title, true);
+  #endif
   window.SetState(FLAG_VSYNC_HINT | FLAG_WINDOW_RESIZABLE);
   // just in case vsync was forcefully disabled, don't want to cook CPU
   SetTargetFPS(240);
