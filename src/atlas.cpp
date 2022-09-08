@@ -1,6 +1,10 @@
 #include "atlas.hpp"
 
-#include <glad/gl.h>
+#ifdef __APPLE__
+  #define GL_SILENCE_DEPRECATION
+#else
+  #include <glad/gl.h>
+#endif
 #include <external/glfw/include/GLFW/glfw3.h>
 
 #include <algorithm>
