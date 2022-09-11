@@ -1,0 +1,108 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '**.h'
+      - '**.hpp'
+      - '**.cpp'
+      - '**.inl'
+      - '**.py'
+      - '**/meson.build'
+      - '**/workflows/**.yaml'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '**.h'
+      - '**.hpp'
+      - '**.cpp'
+      - '**.inl'
+      - '**.py'
+      - '**/meson.build'
+      - '**/workflows/**.yaml'
+  workflow_dispatch:
+
+
+# This ensures that jobs get canceled when force-pushing
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  linux:
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [ 'g++', 'clang' ]
+        type: [ 'debug', 'release' ]
+        compile_library: [ true, false ]
+
+    runs-on: ubuntu-latest
+    container:
+      image: debian:testing
+
+    defaults:
+      run:
+        shell: sh
+
+    steps:
+    - name: Install dependencies
+      run: |
+        apt-get -y update
+        apt-get -y install --no-install-recommends ${{ matrix.compiler }} lld meson pkgconf git ca-certificates locales-all python3-pip catch2 nlohmann-json3-dev
+
+    - uses: actions/checkout@v2
+
+    - name: Check toml.hpp
+      run: |
+        pip3 install --upgrade --requirement tools/requirements.txt 
+        cd tools
+        ./ci_single_header_check.py
+
+    - name: Configure Meson
+      run: |
+        if [ ${{ matrix.compiler }} = g++ ]; then linker=gold; else linker=lld; fi
+        CXX_LD=$linker meson setup build --buildtype=${{ matrix.type }} -Dcompile_library=${{ matrix.compile_library }} -Dpedantic=true -Dbuild_tests=true -Dbuild_examples=true -Dgenerate_cmake_config=false -Db_lto=false -Dubsan_examples=true -Dasan_examples=true
+
+    - name: Build
+      run: meson compile -C build --jobs -1
+
+    - name: Test
+      run: meson test -C build --verbose
+
+  windows:
+    strategy:
+      fail-fast: false
+      matrix:
+        type: [ 'debug', 'release' ]
+        compile_library: [ true ] # , false ] # ... header-only mode takes far too long on github's windows runner
+
+    runs-on: windows-2022
+
+    defaults:
+      run:
+        shell: cmd
+
+    steps:
+    - name: Install dependencies
+      run: |
+        python3 -m pip install -U pip==21.3.1
+        pip3 install meson ninja
+
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Configure Meson
+      run: meson setup --vsenv --buildtype=${{ matrix.type }} -Dcompile_library=${{ matrix.compile_library }} -Dpedantic=true -Dbuild_tests=true -Dbuild_examples=true -Dgenerate_cmake_config=false build
+
+    - name: Build
+      run: meson compile -C build  --jobs -1
+
+    - name: Test
+      run: meson test -C build --verbose

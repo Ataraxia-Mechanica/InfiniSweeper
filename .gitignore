@@ -25,9 +25,6 @@ _deps
 # Packed files
 InfiniSweeper-win64
 
-# Vendors
-vendor/*/
-
 # Un-assembled tiles
 res/*/
 
