@@ -8,16 +8,8 @@ InfiniSweeper is a spin on the classic game Minesweeper. This game adds infinite
 ## Compiling
 InfiniSweeper uses CMake, and supports MSVC, GCC and Clang.
 Follow the following steps to compile:
-1. Clone/Download Releases/Create Symbolic Links to the following libraries into the InfiniSweeper/vendor folder:
-```
-imgui - 1.88
-rlImGui - commit 036fcad
-raylib - 4.0.0
-raylib-cpp - 4.2.3
-toml++ - 3.1.0
-```
-2. Setup CMake with your favorite compilier
-3. Run the following command:
+1. Setup CMake with your favorite compilier
+2. Run the following command:
 ```
 cmake build
 cd build
