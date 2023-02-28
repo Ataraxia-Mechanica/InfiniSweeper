@@ -8,7 +8,7 @@ InfiniSweeper is a spin on the classic game Minesweeper. This game adds infinite
 ## Compiling
 InfiniSweeper uses CMake, and supports MSVC, GCC and Clang.
 Follow the following steps to compile:
-1. Setup CMake with your favorite compilier
+1. Setup CMake with your favorite compiler
 2. Run the following command:
 ```
 cmake build
