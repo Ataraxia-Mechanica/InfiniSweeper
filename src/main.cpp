@@ -29,9 +29,11 @@ int main() {
 
   // icon and screen size
   {
+#ifndef __APPLE__
     auto icon_image = rl::Image{".png", icon_tiny_png, sizeof(icon_tiny_png)};
     icon_image.Format(PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
     SetWindowIcon(icon_image);
+#endif
     int display = GetCurrentMonitor();
     int width = GetMonitorWidth(display);
     int height = GetMonitorHeight(display);
