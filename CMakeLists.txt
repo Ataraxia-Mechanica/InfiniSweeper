@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.14)
 set(CMAKE_CXX_STANDARD 20)
 
+IF(APPLE)
+  SET(CMAKE_OSX_ARCHITECTURES "x86_64;arm64" CACHE STRING "Build architectures for Mac OS X" FORCE)
+ENDIF(APPLE)
+
 project(Template
         VERSION 0.0.1
         LANGUAGES C CXX)
